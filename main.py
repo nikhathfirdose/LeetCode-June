@@ -1,23 +1,19 @@
-# Day -9
-# A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ace" is a subsequence of "abcde" while "aec" is not).
+# Day 10
+# Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+
+# You may assume no duplicates in the array.
+
+# Example 1:
+
+# Input: [1,3,5,6], 5
+# Output: 2
 class Solution:
-    def isSubsequence(self, s: str, t: str) -> bool: 
-        # i=0
-        # j = 0
-        # while i<len(s) and j<len(t): 
-        #     print(t[j])
-        #     if (s[i] == t[j]):
-        #         # print(t[j])
-        #         i+=1   
-        #     else:
-        #         j+=1
-        # print(i)
-        # return i==len(s)
-        if(len(s)==0): 
-            return True
-        if(len(t)==0):
-            return False
-        if(s[0]==t[0]):
-            return self.isSubsequence(s[1:],t[1:])
-        else:
-            return self.isSubsequence(s,t[1:])
+    def searchInsert(self, nums: List[int],target:int):
+        idx =0
+        for i in range(len(nums)):
+            if(nums[i]==target):
+                idx = nums.index(target)
+            else:
+                if(nums[i]<target):
+                    idx+=1
+        return idx
