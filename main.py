@@ -7,13 +7,14 @@
 
 # Input: [1,3,5,6], 5
 # Output: 2
-class Solution:
-    def searchInsert(self, nums: List[int],target:int):
-        idx =0
-        for i in range(len(nums)):
-            if(nums[i]==target):
-                idx = nums.index(target)
-            else:
-                if(nums[i]<target):
-                    idx+=1
-        return idx
+# class Solution:
+def searchInsert(self, nums,target):
+    idx =0
+    for i in range(len(nums)):
+        if(nums[i]==target):
+            idx = nums.index(target)
+        else:
+            if(nums[i]<target):
+                idx+=1
+    return idx
+print(searchInsert(0,[1,2,3,5],8))
