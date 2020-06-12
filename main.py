@@ -1,25 +1,40 @@
-# Day11
-# Given an array with n objects colored red, white or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+# Day12
+#Design a data structure that supports all following operations in average O(1) time.
 
-# Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
+# insert(val): Inserts an item val to the set if not already present.
+# remove(val): Removes an item val from the set if present.
+# getRandom: Returns a random element from current set of elements. Each element must have the same probability of being returned.
+from random import choice
+class RandomizedSet():
+    def __init__(self):
+        self.dictionary = {}
+        self.Array = []
 
-# Note: You are not suppose to use the library's sort function for this problem.
-class Solution:
-    def sortColors(self, nums):
-        l=0
-        curr=0
-        r=len(nums)-1
-        while(curr<=r):
-            if(nums[curr]==0):
-                nums[l],nums[curr]=nums[curr],nums[l]
-                l+=1
-                curr+=1
-            elif(nums[curr]==2):
-                nums[r],nums[curr]=nums[curr],nums[r]
-                # curr+=1
-                r-=1
-            else:
-                curr+=1
-        return nums
-S = Solution
-print(S.sortColors(1,[1,2,0,2,1]))
+        
+    def insert(self, val: int) -> bool:
+        if val in self.dictionary:
+            return False
+        self.dictionary[val] = len(self.Array)
+        self.Array.append(val)
+        return True
+        
+
+    def remove(self, val: int) -> bool:
+        if val in self.dictionary:
+            last_element, idx_of_value_to_be_delted = self.Array[-1], self.dictionary[val]
+            self.Array[idx_of_value_to_be_delted], self.dictionary[last_element] = last_element, idx_of_value_to_be_delted
+            self.Array.pop()
+            del self.dictionary[val]
+            return True
+        return False
+
+    def getRandom(self) -> int:
+        return choice(self.Array)
+        
+
+
+# Your RandomizedSet object will be instantiated and called as such:
+# obj = RandomizedSet()
+# param_1 = obj.insert(val)
+# param_2 = obj.remove(val)
+# param_3 = obj.getRandom()
