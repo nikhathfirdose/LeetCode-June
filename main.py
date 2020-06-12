@@ -1,20 +1,25 @@
-# Day 10
-# Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+# Day11
+# Given an array with n objects colored red, white or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white and blue.
 
-# You may assume no duplicates in the array.
+# Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
 
-# Example 1:
-
-# Input: [1,3,5,6], 5
-# Output: 2
-# class Solution:
-def searchInsert(self, nums,target):
-    idx =0
-    for i in range(len(nums)):
-        if(nums[i]==target):
-            idx = nums.index(target)
-        else:
-            if(nums[i]<target):
-                idx+=1
-    return idx
-print(searchInsert(0,[1,2,3,5],8))
+# Note: You are not suppose to use the library's sort function for this problem.
+class Solution:
+    def sortColors(self, nums):
+        l=0
+        curr=0
+        r=len(nums)-1
+        while(curr<=r):
+            if(nums[curr]==0):
+                nums[l],nums[curr]=nums[curr],nums[l]
+                l+=1
+                curr+=1
+            elif(nums[curr]==2):
+                nums[r],nums[curr]=nums[curr],nums[r]
+                # curr+=1
+                r-=1
+            else:
+                curr+=1
+        return nums
+S = Solution
+print(S.sortColors(1,[1,2,0,2,1]))
