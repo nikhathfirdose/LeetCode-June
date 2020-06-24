@@ -1,21 +1,20 @@
-iceCream = 100
-queue = ["A","C","O","A"]
-dic ={"A": 5, "C": 7, "O": 2}
+# Arrays and Stringd - 2D array
+class Solution:
+    def generate(self, num_rows):
+        triangle = []
 
-while dic[queue[0]]<=iceCream:
-  first = queue.pop(0)
-  iceCream-= dic[first]
-  queue.append(first)
-  print(queue)
-  print(iceCream)
+        for row_num in range(num_rows):
+            # The first and last row elements are always 1.
+            row = [None for _ in range(row_num+1)]
+            # print(row)
+            row[0], row[-1] = 1, 1
+            # print(row)
 
-def flatten(S):
-    if S == []:
-        return S
-    if isinstance(S[0], list):
-        return flatten(S[0]) + flatten(S[1:])
-    return S[:1] + flatten(S[1:])
-s=[[1,2],[3,4],[1,2,3,[9,6,7]]]
-print(flatten(s))
-  
+            # Each triangle element is equal to the sum of the elements
+            # above-and-to-the-left and above-and-to-the-right
+            for j in range(1, len(row)-1):
+                row[j] = triangle[row_num-1][j-1] + triangle[row_num-1][j]
+                # print(row)
+            triangle.append(row)
 
+        return triangle
